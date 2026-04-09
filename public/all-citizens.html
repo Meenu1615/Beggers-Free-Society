@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Citizen Records</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Angular -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+
+    <script>
+        var module = angular.module("citizenModule", []);
+        module.controller("citizenController", function ($scope, $http) {
+
+            $scope.jsonAry = [];
+
+            $scope.doFetchCitizens = function () {
+                $http.get("angular-fetchCitizens").then(allGood, errKuch);
+
+                function allGood(result) {
+                    $scope.jsonAry = result.data;
+                }
+
+                function errKuch(err) {
+                    alert(err);
+                }
+            }
+        });
+    </script>
+</head>
+
+<body class="bg-light" ng-app="citizenModule" ng-controller="citizenController">
+
+<div class="container mt-5">
+
+    <!-- Heading -->
+    <h2 class="text-center mb-4">All Citizen Records</h2>
+
+    <!-- Button -->
+    <div class="text-center mb-3">
+        <button class="btn btn-primary" ng-click="doFetchCitizens()">
+            Fetch All Citizens
+        </button>
+    </div>
+
+    <!-- Card -->
+    <div class="card shadow">
+        <div class="card-body">
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-striped text-center">
+
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Sr.No</th>
+                            <th>Email</th>
+                            <th>Number</th>
+                            <th>Name</th>
+                            <th>Addhar Number</th>
+                            <th>Father's Name</th>
+                            <th>Dob</th>
+                            <th>Gender</th>
+                            <th>Address</th>
+                            <th>City</th>
+                            <th>Adhar Front Pic</th>
+                            <th>Adhar Back Pic</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr ng-repeat="obj in jsonAry">
+                            <td>{{$index+1}}</td>
+                            <td>{{obj.citzenEmail}}</td>
+                            <td>{{obj.citzenMobile}}</td>
+                            <td>{{obj.citzenName }}</td>
+                            <td>{{obj.citzenAdharno}}</td>
+                            <td>{{obj.citzenFathername}}</td>
+                            <td>{{obj.citzenDob}}</td>
+                            <td>{{obj.citzenGender}}</td>
+                            <td>{{obj.citzenAddress}}</td>
+                            <td>{{obj.citzenCity}}</td>
+                            <td>{{obj.citzenadharfront}}</td>
+                            <td>{{obj.citzenadharback}}</td>
+
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

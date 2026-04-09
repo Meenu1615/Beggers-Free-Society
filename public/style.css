@@ -1,0 +1,205 @@
+/* 🔹 Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+    background: #f5f7fa;
+}
+
+/* 🔹 Navbar */
+.navbar {
+    border-radius: 12px;
+    margin: 10px;
+    padding: 10px 20px;
+}
+
+.navbar-brand span {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+}
+
+/* 🔹 Carousel */
+.carousel-item img {
+    /* height: 85vh; */
+    height: 800px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.carousel-caption {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 12px;
+}
+
+/* 🔹 Section Titles */
+h1 {
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* 🔹 Cards */
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: 0.4s ease;
+}
+
+.card img {
+    height: 220px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+/* 🔹 Developer Section */
+#developer {
+    /* background: linear-gradient(to right, #ffffff, #eef2f3); */
+    border-radius: 20px;
+    margin: 20px;
+    padding: 30px;
+}
+
+.developer-img {
+    width: 400px;
+    height: 400px;
+    object-fit: cover;
+    border: 5px solid #0b0b0b;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+.developer-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+}
+
+/* 🔹 Social Icons */
+.icons a {
+    display: inline-block;
+
+    margin: 10px;
+    font-size: 22px;
+    color: #313132;
+    transition: 0.3s;
+}
+
+.icons a:hover {
+    color: #1b1a19;
+    transform: scale(1.2);
+}
+
+/* 🔹 Skills */
+#developer span {
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    /* background: #e3f2fd; */
+    font-weight: 500px;
+}
+
+/* 🔹 Contact Section */
+#contact input,
+#contact textarea {
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 10px rgba(13,110,253,0.3);
+}
+
+/* 🔹 Buttons */
+.btn {
+    border-radius: 25px;
+    padding: 8px 18px;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+/* 🔹 Footer */
+/* footer {
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+} */
+
+.footer-link {
+    text-decoration: none;
+    color: #bbb;
+    transition: 0.3s;
+}
+
+.footer-link:hover {
+    color: #fff;
+    transform: scale(1.05);
+    /* padding-left: 5px; */
+}
+
+.social-icons i {
+    font-size: 20px;
+    margin: 8px;
+    transition: 0.3s;
+}
+
+.social-icons i:hover {
+    color: #efefe3;
+    transform: scale(1.2);
+}
+
+/* 🔹 Modal Styling */
+.modal-content {
+    border-radius: 15px;
+}
+
+.modal-header {
+    background: #0d6efd;
+    color: white;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+/* 🔹 Form Error Styling */
+.err {
+    font-size: 12px;
+}
+
+/* 🔹 Full Width Fix */
+.container {
+    max-width: 100% !important;
+}
+
+/* 🔹 Scroll Animation Smooth */
+.card {
+    opacity: 0;
+}
+
+.card.animate__fadeInUp {
+    opacity: 1;
+}
+
+/* 🔹 Responsive */
+@media (max-width: 768px) {
+    .carousel-item img {
+        height: 900px;
+    }
+
+    .developer-img {
+        width: 180px;
+        height: 180px;
+    }
+}

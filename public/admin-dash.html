@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>   
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous">
+    </script>
+</head>
+<body>
+
+  <div class="row">
+            <div class="col-md-12 fs-2 bg-danger text-white">
+                <center>
+                    Admin Dashboard
+                </center>
+            </div>
+  </div>
+  <br>
+<div class="container">
+  <div class="row mt-1">
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img src="../projPhotos/user manager.avif" width="250px" height="250px" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <a href="all-users.html" id="btnUsers" name="btnUsers" class="btn btn-info">Users </a>
+          </div> <!-- using onclick because we have to pass data to UsersManager.html page -->
+      </div>
+      <br>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img src="../projPhotos/volunteersss.jpg" width="250px" height="250px" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+        <a href="all-volunteer.html" id="btnVolunteers" name="btnVolunteers" class="btn btn-info">Volunteers</a>
+        </div> <!-- using onclick because we have to pass data to volunteers.html page -->
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card" style="width: 18rem;">
+        <img src="../projPhotos/citizenss.jpg" width="250px" height="250px" class="card-img-top" alt="...">
+          <div class="card-body text-center">
+            <a href="all-citizens.html" id="btnCitizens" name="btnCitizens" class="btn btn-info" >Citizens</a>
+          </div> <!-- using onclick because we have to pass data to citizens.html page -->
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row mt-1">
+        <div class="col-md-4">
+             <div class="card" style="width: 18rem;">
+                  <img src="../projPhotos/Beggars.png" width="250px" height="250px" class="card-img-top" alt="...">
+                     <div class="card-body text-center">
+                        <a href="all-beggers.html" id="btnBaggers" name="btnBaggers" class="btn btn-info">Beggers</a>
+                     </div> <!-- using onclick because we have to pass data to beggers.html page -->
+            </div>
+        </div>  
+
+        <div class="col-md-4">
+             <div class="card" style="width: 18rem;">
+                  <img src="../projPhotos/logout.jpg" width="250px" height="250px" class="card-img-top" alt="...">
+                     <div class="card-body text-center">
+                        <button type="button" id="btnLogout" name="btnLogout" class="btn btn-info">Logout</button>
+                     </div>
+            </div>
+        </div> 
+  </div>
+</div>
+
+
+</body>
+</html>

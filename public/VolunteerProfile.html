@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Volunteer Profile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+    <style>
+         .container {
+            margin-top: 30px;
+            border: 1px rgb(219, 198, 198) solid;
+            padding: 10px;
+        }
+
+        #btnFetch {
+            margin-top: 30px;
+            /* font-size: 50px; */
+        }
+
+        .row {
+            margin-bottom: 10px;
+        }
+        .update {
+            margin: auto;
+        } 
+
+         body {
+        /* background: linear-gradient(135deg, #fdf6ec, #f8e8d8); */
+        font-family: 'Segoe UI', sans-serif;
+         }
+        /* /* .container {
+        margin-top: 40px;
+        background-color: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        max-width: 900px; 
+        }  */
+        h1{
+            margin-top: 30px;
+        }
+    </style>
+
+<script>
+    $(document).ready(function(){
+            $("#btnFetch").click(function(){
+                //method=get
+                 let obj={
+                    
+                    url:"/findone",
+                    data:{
+                        txtEmail:$("#txtEmail").val()
+                    }
+                }
+
+                $.ajax(obj).then(function(respJsonAry){
+                        alert(JSON.stringify(respJsonAry))
+                        $("#txtName").val(respJsonAry[0].Name);
+                        $("#txtMob").val(respJsonAry[0].Mob);
+                        $("#txtAdd").val(respJsonAry[0].Add);
+                        $("#txtCity").val(respJsonAry[0].City);
+                        $("#txtGen").val(respJsonAry[0].Gen);
+                        $("#txtOcc").val(respJsonAry[0].Occ);
+                }).fail(function(err){
+                        alert(err.message)
+                })
+            })
+
+            $("#vtype").change(function(){
+             let type = $(this).val();
+
+                if(type === "NGO"){
+                $("#ngoDiv").show();
+                }
+                else{
+                $("#ngoDiv").hide();
+                $("#ngono").val(""); // clear value
+                }
+            });
+    }) 
+
+    
+
+</script>
+    <script>
+        function doPrev1(event) {
+
+            const file = event.target.files[0];
+            if (file != null) {
+
+                document.querySelector("#prev1").src = URL.createObjectURL(file);
+            }
+        }
+
+        function doPrev2(event) {
+
+            const file = event.target.files[0];
+            if (file != null) {
+
+                document.querySelector("#prev2").src = URL.createObjectURL(file);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <div class="row">
+        <div class="col-md-12 fs-2 text-black">
+            <center>
+               <h1> Volunteer Profile</h1>
+            </center>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <form class="g-3" action="/volunteer-process" enctype="multipart/form-data" method="post">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <label for="validationDefault01" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="txtEmail" name="txtEmail" required>
+                        </div>
+
+                        <div class="col-md-2" id="fetchbtn">
+                             <input type="button" class="btn btn-success" value="Fetch Record" id="btnFetch">
+                            <!-- <button class="btn btn-success" type="button"  >Fetch Record</button> -->
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="validationDefault02" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="txtName" name="txtName" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="validationDefault03" class="form-label">Contact No.</label>
+                            <input type="text" class="form-control" id="txtMob" name="txtMob" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="validationDefault04" class="form-label">Address</label>
+                            <input type="text" class="form-control" id="txtAdd" name="txtAdd" required>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label for="validationDefault05" class="form-label">City</label>
+                            <input type="text" class="form-control" id="txtCity" name="txtCity" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="validationDefault06" class="form-label">Gender</label>
+                            <select class="form-select" id="txtGen" name="txtGen" required>
+                                <option value="Select" selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label for="validationDefault07" class="form-label">Occupation</label>
+                            <select class="form-select" id="txtOcc" name="txtOcc" required>
+                                <option value="Select" selected>Select Occupation</option>
+                                <option value="Student">Student</option>
+                                 <option value="Fresher">Fresher</option>
+                                <option value="Business">Business</option>
+                                <option value="Job">Job</option>
+                               
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                            <label for="validationDefault07" class="form-label" >Volunteer type</label>
+                            <select class="form-select" id="vtype" name="vtype"  required>
+                                <option value="Select" selected>Select Volunteer Type</option>
+                                <option value="Individual">Individual</option>
+                                <option value="NGO">NGO</option>
+                            </select>
+                        </div>
+
+                    <div class="col-md-3" id="ngoDiv" style="display:none;">
+                            <label class="form-label">NGO Number</label>
+                            <input type="text" class="form-control" id="ngono" name="ngono">
+                        </div>
+
+                    <div class="row mt-3">
+
+                        <div class="col-md-3 text-center">
+                            <label class="form-label">Upload Aadhar Card:</label>
+                            <input type="file" name="aadharPic" class="form-control" onchange="doPrev1(event, 'prev1');">
+                            <br>
+                            <img src="" id="prev1" width="120" height="120" class="border">
+                        </div>
+
+                        <div class="col-md-3 text-center">
+                            <label class="form-label">Upload Profile Pic:</label>
+                            <input type="file" name="profilePic" class="form-control"
+                                onchange="doPrev2(event, 'prev2');">
+                            <br>
+                            <img src="" id="prev2" width="120" height="120" class="border">
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-1" class="update" id="update" style="margin-left: 550px; margin-top: 10px;">
+                            <button class="btn btn-success" type="submit">Submit</button>
+                        </div>
+                            &nbsp &nbsp &nbsp &nbsp;
+                        <div class="col-md-1" class="update" id="submit">
+                            <button class="btn btn-secondary" type="submit"
+                            style="margin-top: 10px; margin-left: 0px;">Update</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

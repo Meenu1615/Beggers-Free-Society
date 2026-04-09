@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Index</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+   
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Typed.js -->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    
+    <!-- Font Awesome -->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+     <link rel="stylesheet" href="style.css">
+
+<style>
+    #user-div{
+    width: 100px; height: 100px;
+    /* border: 1px rgb(0, 0, 0) solid; */
+    background-image: url(../projPhotos/userlogin.png);
+    background-size: 75%;
+    background-repeat: no-repeat;
+    background-position:center;
+    margin: auto;
+    margin-top: 10px;
+    border-radius: 50%; 
+    }
+
+    .ok{
+        color: green; border: 1px green solid; border-radius: 10px;text-align: center; padding: 2px ; width: 50px;
+         margin-top: 2px;
+        }
+    .not-ok{
+         color: red; border: 1px red solid; border-radius: 10px;text-align: center; padding: 2px ; width: 50px;
+        margin-top: 2px;
+        }
+
+</style>
+
+    <!-- jQuery Code -->
+    <script>
+        $(document).ready(function () {
+            // Signup Modal Email validation
+            $("#txtEmail").blur(function(){
+                
+                let email=$(this).val();
+                let regEx=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                let resp=regEx.test(email);
+                
+                if(resp==true)
+                    $("#errEmail").html("Valid").addClass("ok").removeClass("not-ok");
+                else
+                    $("#errEmail").html("Invalid").addClass("not-ok").removeClass("ok");
+               
+            })
+
+            // Signup Modal password validation
+            $("#txtPwd").blur(function(){
+                 let regex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+                    let pwd=$(this).val();
+                    if(regex.test(pwd))
+                        $("#errPwd").html("Valid").addClass("ok").removeClass("not-ok");
+                    else
+                        // $("#errPwd").html("Invalid").addClass("not-ok").removeClass("ok");
+                    $("#errPwd").html("Invalid").addClass("not-ok").removeClass("ok");
+                        
+            })
+
+            // Login Modal Email validation
+            $("#txtEmail1").blur(function(){
+                
+                let email=$(this).val();
+
+                let regEx=/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                let resp=regEx.test(email);
+                
+                if(resp==true)
+                    $("#errEmail1").html("Valid").addClass("ok").removeClass("not-ok");
+                else
+                    $("#errEmail1").html("Invalid").addClass("not-ok").removeClass("ok");
+               
+            })
+            
+            // Login Modal password validation
+            $("#txtPwd1").blur(function(){
+                 let regex=/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+                    let pwd=$(this).val();
+                    if(regex.test(pwd))
+                        $("#errPwd1").html("Valid").addClass("ok").removeClass("not-ok");
+                    else
+                        $("#errPwd1").html("Invalid").addClass("not-ok").removeClass("ok");
+                        
+            })
+
+            // Show/Hide password for Login Modal
+            $(".fa-solid").click(function()
+            {
+                if($("#txtPwd1").prop("type")=="password")
+                    {
+                      $("#txtPwd1").prop("type","text");
+                      $(".fa-solid").addClass("fa-eye-low-vision").removeClass("fa-eye");;
+                   }
+                   else
+                   {
+                      $("#txtPwd1").prop("type","password");
+                      $(".fa-solid").removeClass("fa-eye-low-vision").addClass("fa-eye");;
+                   }
+            })
+            // Show/Hide password for Signup Modal
+            $(".fa-solid").click(function()
+            {
+                if($("#txtPwd").prop("type")=="password")
+                    {
+                      $("#txtPwd").prop("type","text");
+                      $(".fa-solid").addClass("fa-eye-low-vision").removeClass("fa-eye");;
+                   }
+                   else
+                   {
+                      $("#txtPwd").prop("type","password");
+                      $(".fa-solid").removeClass("fa-eye-low-vision").addClass("fa-eye");;
+                   }
+            })
+
+            $("#signupform").submit(function (e) {
+                e.preventDefault();
+
+                let obj = {
+                    url: "/signup-process",
+                    type: "get",
+                    data: {
+                        txtEmail: $("#txtEmail").val(),
+                        txtPwd: $("#txtPwd").val(),
+                        txtUtype: $("#txtUtype").val()
+                    }
+                };
+
+                $.ajax(obj).then(resp =>
+                 alert(resp))     
+                 .fail(err => alert(err.message));
+            });
+
+$("#loginform").submit(function (e) {
+    e.preventDefault();
+
+    let obj = {
+        url: "/login-process",
+        type: "get",
+        data: {
+            txtEmail: $("#txtEmail1").val(),
+            txtPwd: $("#txtPwd1").val(),
+        }
+    };
+
+    $.ajax(obj).then(resp => {
+
+        console.log("Response:", resp);
+
+        let userType = resp.trim().toLowerCase();
+
+        // Save user
+        localStorage.setItem("activeuser", $("#txtEmail1").val());
+
+        if (userType.includes("volunteer")) {
+            localStorage.setItem("activeuser", $("#txtEmail1").val())
+            window.location.href = "dash-vol-ngo.html";   // ✅ volunteer dashboard
+        } 
+        else if (userType.includes("citizen")) {
+            localStorage.setItem("activeuser", $("#txtEmail1").val())
+            window.location.href = "citizen-dash.html"; // ✅ citizen dashboard
+        } 
+        else {
+            alert("Invalid login");
+        }
+
+    }).fail(err => alert(err.message));
+});
+
+            $(window).scroll(function(){
+             $(".card").each(function(){
+            let top = $(this).offset().top;
+            let scroll = $(window).scrollTop();
+            let height = $(window).height();
+
+            if(scroll > top - height + 100){
+                $(this).addClass("animate__animated animate__fadeInUp");
+            }
+            });
+            });
+
+            $("#sendBtn").click(function () {
+            let obj = {
+            url: "/contact-process",
+            type: "get",
+            data: {
+            name: $("#name").val(),
+            email: $("#email").val(),
+            message: $("#message").val()
+            }
+            };
+
+            $.ajax(obj)
+            .then(function (resp) {
+            alert("Message Sent Successfully : " + resp);
+            
+            // Clear form
+            $("#name").val("");
+            $("#email").val("");
+            $("#message").val("");
+            })
+            .fail(function (err) {
+            alert("Error sending message : " + err.message);
+            });
+            });
+            var typed= new Typed(".text", {
+            strings:["Frontend Developer", "Engineering Student", "Web Developer"],
+            typeSpeed:100,
+            backSpeed:100,
+            backDelay:1000,
+             loop:true,
+            });
+        });
+</script>
+    
+
+</head>
+
+<body id="home">
+<div class="container">
+    <!-- 🔹 Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"> -->
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+         <img src="projPhotos/begg logo.png" alt="logo" width="45" height="45" 
+         class="me-2 rounded-circle shadow">
+         <span class="fw-bold">Begger Free Society</span>
+        </a>    
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+             <li class="nav-item"><a class="nav-link" href="#home">Home </a></li>
+             <li class="nav-item"><a class="nav-link" href="#services">Our Services</a></li>
+             <li class="nav-item"><a class="nav-link" href="#developer">Meet the developer </a></li>
+             <li class="nav-item"><a class="nav-link" href="#contact">Reach Us </a></li>
+            </ul>
+            <!-- Buttons -->
+            <button class="btn btn-light ms-3" data-bs-toggle="modal" data-bs-target="#signupModal">Signup</button>
+            <button class="btn btn-warning ms-2" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+        </div>
+      
+    </div>
+ 
+</nav>
+<br>
+<!-- 🔹 Carousel -->
+
+    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+        <div class="carousel-caption">
+        <h3>Helping People in Need</h3>
+        <p>Connecting citizens with volunteers</p>
+    </div>
+      <img src="projPhotos/image.png" class="d-block w-100" alt="...">
+    </div>
+
+    <div class="carousel-item">
+        <div class="carousel-caption">
+        <h3>Support Those in Need</h3>
+        <p>Your small help can bring a big change in someone's life.</p>
+        </div>      
+      <img src="projPhotos/image1.png" class="d-block w-100" alt="...">
+    </div>
+
+    <div class="carousel-item">
+        <div class="carousel-caption">
+        <h3>Together We Can Do More</h3>
+        <p>Join our platform and be a part of the helping community.</p>
+        </div>
+      <img src="projPhotos/image.png" class="d-block w-100" alt="...">
+    </div>
+
+    <!-- <div class="carousel-item">
+        <div class="carousel-caption">
+        <h3>Be the Reason Someone Smiles</h3>
+        <p>Volunteer today and create a positive impact.</p>
+    </div>
+      <img src="projPhotos/begg4.webp" class="d-block w-100" alt="..."> 
+    </div>-->
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+<!-- 🔹 Services -->
+<section id="services">
+    <div class="container text-center">
+       <h1><b><u>Our Services</u></b></h1><br>
+        <div class="row g-4">
+            <!-- Card 1 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow">
+                    <img src="projPhotos/card1.jpeg" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><b>Profile Registration Service</b></h4>
+                        <p class="card-text">
+                            Register individuals with identity,details, and skills to connect them with job opportunities and support services.We help individuals register their profiles to access support, track needs, and connect them with the right services—ensuring timely help and better care.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="col-md-4">
+                <div class="card h-100 shadow">
+                    <img src="projPhotos/card3.jpeg" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><b>Service & Emergency Support</b></h4>
+                        <p class="card-text">
+                           Providing immediate support to people in need, especially the homeless and underprivileged.Our goal is to ensure safety, dignity, and timely help for every individual in distress. We connect those in need with essential services, including shelter, food, medical aid, to improve their well-being and help them regain stability.
+                        </p> 
+                    </div>
+                </div>
+            </div>
+
+                <!-- Card 4 -->
+                 <div class="col-md-4">
+                <div class="card h-100 shadow">
+                    <img src="projPhotos/card4.jpeg" class="card-img-top">
+                    <div class="card-body">
+                        <h4 class="card-title"><b>From Begging to Earning</b></h4>
+                        <p class="card-text">
+                           Help individuals transition from begging to earning by providing skill development, job placement, and support services.Our goal is to help people in need gain financial independence and improve their quality of life through sustainable employment opportunities.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>        
+<hr>
+<!-- 🔹 Developer -->
+<section id="developer" class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- LEFT: IMAGE -->
+            <div class="col-md-5 text-center mb-4">
+                <!-- <img src="projPhotos/profileimg.avif"
+                     class="img-fluid developer-img"
+                     alt="Developer"> -->
+                     <img src="projPhotos/developer pic.jpeg" class="img-fluid rounded-circle developer-img" alt="Developer">
+            </div>
+
+            <!-- RIGHT: CONTENT -->
+            <div class="col-md-7">
+                <!-- <h2 class="mb-3">Meet the Developer</h2> -->
+                 <h1><b><u>Meet the Developer</u></b></h1><br>
+                <!-- <h4 class="text-primary">Meenu</h4> -->
+                <h3>Hello, It's Me</h3>
+                <h1>Meenu</h1>
+                <h3>I'm a<span class="text"></span></h3>
+                <p>
+                I am a dedicated Web Developer with practical experience in building diverse projects such as an Amazon clone, 
+                interactive games, e-commerce platforms, and a virtual assistant. My skill set includes HTML, CSS, JavaScript, 
+                Bootstrap, and Tailwind CSS, with ongoing learning in MERN stack development.
+
+                I am passionate about developing scalable and user-centric applications and continuously enhancing my skills 
+                through real-world project implementation.
+                </p>
+
+                <div class="icons">
+                    <a href="#" style="--i:7"><i class='bx bxl-instagram'></i></a>
+                    <a href="#" style="--i:8"><i class='bx bxl-github' ></i></a>
+                    <a href="#" style="--i:9"><i class='bx bxl-linkedin' ></i></a>
+                    <a href="#" style="--i:10"><i class='bx bxl-gmail' ></i></a>
+                </div>
+
+                <!-- Skills -->
+                <div class="mb-3">
+                    <b><h2><u>Technical Skills</u></h2></b>
+                    <span><i style="color:#c95d2e" class="bx bxl-html5"></i>HTML </span>
+                    <span><i style="color:#2e5dc9" class="bx bxl-css3"></i>CSS </span>
+                    <span><i style="color:purple" class="bx bxl-bootstrap"></i>Bootstrap </span>
+                    <span><i style="color:rgb(165, 165, 68)" class="bx bxl-javascript"></i>JavaScript </span>
+                    <span><i style="color:green" class="bx bxl-nodejs"></i>Node.js</span>
+                </div>
+                <!-- Buttons -->
+                <!-- <a href="#" class="btn btn-primary me-2">View Resume</a>
+                <a href="#" class="btn btn-outline-dark">Contact Me</a> -->
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+<!-- 🔹 Reach Us -->
+
+<section>
+<div class="container">
+    <div class="row align-items-center">
+        <h1 class="text-center"><b><u>Reach Us</u></b></h1><br>
+        <div class="row mt-4 justify-content-center">
+            <div class="col-md-6" id="contact">
+                <input type="text" class="form-control mb-3" placeholder="Your Name">
+                <input type="email" class="form-control mb-3" placeholder="Email">
+                <textarea class="form-control mb-3" rows="4" placeholder="Message"></textarea>
+                 <button id="sendBtn" class="btn btn-primary">Send</button>
+            </div>
+            
+            <div class="col-md-12">
+                 <h1 class="text-center"><b><u>Our Location</u></b></h1><br>
+                <iframe src="https://maps.google.com/maps?q=india&output=embed"
+                    width="100%" height="400" style="border-radius:10px;"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- 🔹 Footer -->
+<footer class="bg-dark text-light pt-5">
+    <div class="container">
+
+        <div class="row">
+            <!-- About -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Begger Free Society:-</h5>
+                <p>
+                    A platform dedicated to helping people in need by connecting
+                    citizens and volunteers for a better society.
+                </p>
+            </div>
+            <!-- Quick Links -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="footer-link">Home</a></li>
+                    <li><a href="#services" class="footer-link">Services</a></li>
+                    <li><a href="#developer" class="footer-link">Developer</a></li>
+                    <li><a href="#contact" class="footer-link">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact -->
+            <div class="col-md-4 mb-4">
+                <h5 class="fw-bold">Contact</h5>
+                <p>Email: support@mysite.com</p>
+                <p>Phone: +91 98765 43210</p>
+                
+                <!-- follow us -->
+                 <div class="footer-section social">
+                     <h3>Follow Us</h3>
+                     <div class="social-icons">
+                    <!-- <a href="#" style="--i:7"><i class='bx bxl-instagram'></i></a> -->
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                     <a href="#"><i class="fab fa-github"></i></a>
+                    </div>
+                     </div>
+
+            </div>
+
+        </div>
+
+        <hr class="border-light">
+
+        <!-- Bottom -->
+        <div class="text-center pb-3">
+            <p class="mb-0">My Website Beggers Free Society | Designed by Meenu</p>
+        </div>
+
+    </div>
+</footer>
+
+<!-- 🔹 Signup Modal -->
+<div class="modal" id="signupModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Signup Here</h3>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="signupform">
+                    <input type="email" class="form-control mb-2" id="txtEmail" name="txtEmail" placeholder="Enter Valid Email">
+                     <div class="err" id="errEmail">*</div><br>
+                    <input type="password" class="form-control mb-2" id="txtPwd" name="txtPwd" placeholder="Enter Valid Password">
+                    <i class="fa-solid fa-eye fa-bounce"></i>
+                     <div class="err" id="errPwd">*</div><br>
+
+                    <select class="form-control mb-2" id="txtUtype" name="txtUtype">
+                        <!-- <option>Select</option> -->
+                         <option value="">Select</option>
+                        <!-- <option value="1">Citizen</option>
+                        <option value="2">Volunteer</option> -->
+                        <option value="volunteer">Volunteer</option>
+                        <option value="citizen">Citizen</option>
+                    </select>
+
+                    <button class="btn btn-primary w-100">Signup</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🔹 Login Modal -->
+<div class="modal" id="loginModal" tabindex="-1" aria-labelledby="exampleLoginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login Here</h2>
+                <div id="user-div"></div>
+                <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <form id="loginform">
+                    <input type="email" class="form-control mb-2" name="txtEmail1" id="txtEmail1" placeholder="Email">
+                     <div class="err" id="errEmail1">*</div><br>
+                    <input type="password" class="form-control mb-2" name="txtPwd1" id="txtPwd1"  placeholder="Password">
+                     <div class="err" id="errPwd1">*</div><br>
+                    <i class="fa-solid fa-eye "></i>
+
+                    <button class="btn btn-success w-100">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+ <!-- Bootstrap JS -->
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script> 
+</div> 
+</div>
+</body>
+</html>
